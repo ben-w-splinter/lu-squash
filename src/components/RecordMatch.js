@@ -18,36 +18,54 @@ export const RecordMatch = ({players}) => {
       }
   }
 
-  const derankPlayers = (topRank, bottomRank) => {
-      for (let index = bottomRank+1; index < topRank+1; index++) {
-          let player = players[index];
-          player.rank --;
-          players[index] = player;
-      }
+  const derankPlayers = (topRank, bottomRank) => 
+  {
+    console.log(topRank, bottomRank);
+    //Move the winning player into the position of the person they beat 
+    let topPosition = players[topRank].rank;
+
+    //Loops through from bottom, reducing rank (up the table)
+    for (let index = bottomRank - 1; index >= topRank; index--) 
+    {
+      console.log("Changing " + (players[index].name) + " to " + (index + 1));
+      players[index].rank = (index + 1);
+    }
+
+    //Moves winning player into position of original top position
+    players[bottomRank].rank = topPosition
   }
 
   const handleSubmit = (e) => {
       e.preventDefault();
       console.log("Ran with", myScore, opScore)
-      //Find who won
+
+      //If I won
       if (myScore > opScore)
       {
           console.log("Getting Ranks")
           const myRank = getPlayer(myName).rank;
           const opRank = getPlayer(opName).rank;
-          //Move everyone else down
-          derankPlayers(Math.max(myRank, opRank), Math.min(myRank, opRank))
-          //Get my player
-          const myPlayer = getPlayer(myName);
-          const newPlayer = myPlayer;
-          //Change my rank
-          newPlayer.rank = opRank;
-          players[players.indexOf(myPlayer)] = newPlayer;
-          console.log(players)
-      }
-      else{
 
+          //If i won and have a lower rank, swap
+          //Move everyone else down
+          if (myRank > opRank) 
+          {
+            derankPlayers(Math.min(myRank, opRank), Math.max(myRank, opRank)) 
+          }
       }
+      else
+      {
+        const myRank = getPlayer(myName).rank;
+        const opRank = getPlayer(opName).rank;
+
+        //If i lost and have a better rank, swap
+        if (myRank < opRank)
+        {
+          derankPlayers(Math.min(myRank, opRank), Math.max(myRank, opRank)) 
+        }
+      }
+
+      console.log(players)
   }
   return (
     <StyledInputForm>
