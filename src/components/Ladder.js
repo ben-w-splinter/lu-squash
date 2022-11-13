@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { DatabaseConnection } from '../Firebase.js';
-import { getDatabase, ref, onValue } from "firebase/database";
 import { StyledLadder } from './styles/StyledLadder.js';
 
-export const Ladder = () => 
+export const Ladder = ({players}) => 
 {
-  DatabaseConnection();
-  const db = getDatabase();
-
-  //Create a use state hook. Players is the variable, setPlayers is the function to set the value of players
-  const [players, setPlayers] = useState([]);
-
-  //Get the reference to the database
-  const dbRef = ref(db, '/Players/');
-
-  //Here we use the useEffect hook to only call this function when the website has loaded
-  //We have to do this because onValue is an async function and will be loaded after the DOM 
-  //has loaded
-  useEffect(()=>{
-    onValue(dbRef, (snapshot) => {
-      const data = snapshot.val();
-      setPlayers(data);
-    });
-  })
 
   return (
     <StyledLadder>

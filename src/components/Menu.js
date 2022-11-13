@@ -3,7 +3,7 @@ import { StyledMenu } from './styles/StyledMenu'
 import { RecordMatch } from './RecordMatch'
 import { AddPlayer } from './AddPlayer'
 
-export const Menu = () => {
+export const Menu = ({players}) => {
     const [showRecord, setRecordShown] = useState(false);
     const [showAdd, setAddShown] = useState(false);
 
@@ -23,7 +23,7 @@ export const Menu = () => {
         <StyledMenu>
             <h1>Menu</h1>
             <button onClick={handleRecordClick}>Record Match</button>
-            {showRecord && (<RecordMatch/>)}
+            {showRecord && (<RecordMatch players = {players}/>)}
             <button onClick={handleAddClick}>Add Player</button>
             {showAdd && <AddPlayer/>}
         </StyledMenu>
