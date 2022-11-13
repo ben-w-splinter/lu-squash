@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { DatabaseConnection } from '../Firebase.js';
 import { getDatabase, ref, onValue } from "firebase/database";
+import { StyledLadder } from './styles/StyledLadder.js';
 
 export const Ladder = () => 
 {
@@ -24,7 +25,7 @@ export const Ladder = () =>
   })
 
   return (
-    <table>
+    <StyledLadder>
       <tr>
         <th>Name</th>
         <th>Rank</th>
@@ -41,7 +42,7 @@ export const Ladder = () =>
           )
         })
       }
-    </table>
+    </StyledLadder>
   )
 
 }
