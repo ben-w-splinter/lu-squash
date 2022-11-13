@@ -19,7 +19,7 @@ export const RecordMatch = ({players}) => {
   }
 
   const derankPlayers = (topRank, bottomRank) => {
-      for (let index = bottomRank; index < topRank; index++) {
+      for (let index = bottomRank+1; index < topRank+1; index++) {
           let player = players[index];
           player.rank --;
           players[index] = player;

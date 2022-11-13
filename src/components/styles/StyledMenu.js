@@ -11,7 +11,7 @@ export const StyledMenu = styled.div`
     border-radius: 25px;
     background-color: #9EA0A0;
     padding: 1rem;
-    max-height: 50vh;
+    max-height: 600px;
     color: black;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
