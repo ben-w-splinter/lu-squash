@@ -1,56 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { DatabaseConnection } from '../Firebase.js';
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 export const Ladder = () => 
 {
   DatabaseConnection();
-  const dbRef = ref(getDatabase());
+  const db = getDatabase();
 
-  get(child(dbRef, `Players`)).then((snapshot) => 
-  {
-    if (snapshot.exists()) 
-    {
-      let databaseData = snapshot.val();
+  //Create a use state hook. Players is the variable, setPlayers is the function to set the value of players
+  const [players, setPlayers] = useState([]);
 
-      console.log(databaseData);
+  //Get the reference to the database
+  const dbRef = ref(db, '/Players/');
 
-      const players = [
-        {name: "Louis Fisher", rank: 1},
-        {name: "Gassman", rank: 2},
-        {name: "Bob", rank: 3},
-        {name: "Robert", rank: 4},
-      ];
+  //Here we use the useEffect hook to only call this function when the website has loaded
+  //We have to do this because onValue is an async function and will be loaded after the DOM 
+  //has loaded
+  useEffect(()=>{
+    onValue(dbRef, (snapshot) => {
+      const data = snapshot.val();
+      setPlayers(data);
+    });
+  })
 
-      return (
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Rank</th>
-          </tr>
-          {
-            //No idea how to loop through the object
-            databaseData.forEach(data => 
-            {
-              return(
-                <tr>
-                  <td>{data.name}</td>
-                  <td>{data.rank}</td>
-                </tr>
-              )
-            })
-          }
-        </table>
-      )
-    } 
-    else 
-    {
-      console.log("No data available");
-    }
-  }).catch((error) => 
-  {
-    console.error(error);
-  });
+  return (
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Rank</th>
+      </tr>
+      {
+        //We use map to loop through the content. This will actually return the object this way
+        players.map((data) => 
+        {
+          return(
+            <tr>
+              <td>{data.name}</td>
+              <td>{data.rank}</td>
+            </tr>
+          )
+        })
+      }
+    </table>
+  )
 
-  return null;
 }
