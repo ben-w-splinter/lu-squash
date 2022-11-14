@@ -10,14 +10,6 @@ export const RecordMatch = ({players}) => {
   const [opName, setOpName] = useState("");
   const [opScore, setOpScore] = useState(0);
 
-  const getPlayer = (name) => {
-      for (let index = 1; index < players.length; index++) {
-          if(players[index].name === name){
-            return players[index]
-          }
-      }
-  }
-
   const derankPlayers = (topRank, bottomRank) => 
   {
     console.log(topRank, bottomRank);
@@ -47,6 +39,14 @@ export const RecordMatch = ({players}) => {
     {
         rank: topPosition
     });
+  }
+
+  const getPlayer = (name) => {
+    for (let index = 1; index < players.length; index++) {
+        if(players[index].name === name){
+          return players[index]
+        }
+    }
   }
 
   const clearForm = () => {
