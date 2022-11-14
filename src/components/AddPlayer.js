@@ -9,22 +9,42 @@ export const AddPlayer = ({players}) => {
   const handleClick = (e)=>
   {
     e.preventDefault();
+    document.getElementById('addplayer').reset()
     console.log("Add player", playerName)
-  
-    const rank = players.length;
+    //Check if the player is in the database
+    let playerExists = false;
+    let playersArray = Object.values(players);
+    for (let index = 0; index < playersArray.length; index++) {
+        if (playersArray[index].name === playerName){
+          playerExists = true;
+          break;
 
-    const db = getDatabase();
-    set(ref(db, 'Players/' + playerName), 
-    {
-      name : playerName,
-      rank : rank
-    });
-
+    }
   }
+  if (playerExists)
+  {
+    document.getElementById('alertap').innerHTML = "This player already exists!"
+    document.getElementById('alertap').style.color = "red"
+    setTimeout(() => {document.getElementById('alertap').innerHTML = ""}, 4000)
+    return
+  }
+  const rank = players.length;
+
+  const db = getDatabase();
+  set(ref(db, 'Players/' + playerName), 
+  {
+    name : playerName,
+    rank : rank
+  });
+  document.getElementById('alertap').innerHTML = "Success! Welcome to the Ladder!"
+  document.getElementById('alertap').style.color = "green"
+  setTimeout(() => {document.getElementById('alertap').innerHTML = ""}, 4000)
+}
 
   return (
     <StyledInputForm>
-      <form>
+      <form id = 'addplayer'>
+        <div id='alertap'></div>
         <div className='namescore'>
           <input type="text" placeholder="Player Name" onChange={(v) => setPlayerName(v.target.value)}/>
         </div>
