@@ -21,13 +21,14 @@ export const StyledMenu = styled.div`
     }
     button{
         text-decoration: none;
-        width: fit-content;
+        width: 10rem;
         font-size: medium;
         border: 2px solid red;
         background-color: red;
         color: wheat;
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         padding: 0.5rem;
+        border-radius: 8px;
     }
 
     button:hover{
