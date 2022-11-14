@@ -18,7 +18,7 @@ export const MainPage = () => {
   const [isInitialRender, setIsInitialRender] = useState(true);
 
   //Get the reference to the database
-  const dbRef = query(ref(db, '/Players/'), orderByValue("rank"))
+  const dbRef = query(ref(db, '/Players/'), orderByValue("rank"));
 
   //Here we use the useEffect hook to only call this function when the website has loaded
   //We have to do this because onValue is an async function and will be loaded after the DOM 

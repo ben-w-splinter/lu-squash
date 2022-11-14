@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { StyledInputForm } from './styles/StyledInputForm'
-
+import { getDatabase, ref, update } from "firebase/database";
 
 export const RecordMatch = ({players}) => {
 
@@ -29,10 +29,24 @@ export const RecordMatch = ({players}) => {
     {
       console.log("Changing " + (players[index].name) + " to " + (index + 1));
       players[index].rank = (index + 1);
+
+      const database = 'Players/' + index;
+
+      console.log(database);
+
+      update(ref(getDatabase(), database), 
+      {
+        rank: (index + 1)
+      });
     }
 
     //Moves winning player into position of original top position
-    players[bottomRank].rank = topPosition
+    const database = 'Players/' + bottomRank;
+
+    update(ref(getDatabase(), database), 
+    {
+        rank: topPosition
+    });
   }
 
   const handleSubmit = (e) => {
