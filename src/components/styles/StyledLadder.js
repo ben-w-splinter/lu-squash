@@ -17,10 +17,20 @@ export const StyledLadder = styled.table`
         border: 1px solid;
     }
 
+    tr{
+        background-color: white;
+    }
+
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
     tr:hover{
         background-color: #b5121b;
+    }
+
+    @media(max-width : 1000px)
+    {
+        width : calc(100% - 2rem);
+
     }
 `
