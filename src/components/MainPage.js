@@ -4,7 +4,7 @@ import { Menu } from './Menu'
 import { StyledMainPage } from './styles/StyledMainPage'
 import { DatabaseConnection } from '../Firebase.js';
 import { useState, useEffect } from 'react'
-import { getDatabase, ref, onValue, orderByValue, query } from "firebase/database";
+import { getDatabase, ref, onValue, query } from "firebase/database";
 
 export const MainPage = () => {
   DatabaseConnection();
@@ -18,7 +18,7 @@ export const MainPage = () => {
   const [isInitialRender, setIsInitialRender] = useState(true);
 
   //Get the reference to the database
-  const dbRef = query(ref(db, '/Players/'), orderByValue("rank"));
+  const dbRef = query(ref(db, '/Players'));
 
   //Here we use the useEffect hook to only call this function when the website has loaded
   //We have to do this because onValue is an async function and will be loaded after the DOM 
@@ -29,11 +29,21 @@ export const MainPage = () => {
       onValue(dbRef, (snapshot) => 
       {
         const data = snapshot.val();
-        setPlayers(data);
+        setPlayers(sorted(data));
         setIsInitialRender(false);
       });
     }
   })
+
+  const sorted = (data) => {
+    let sortedPlayers = []
+    Object.values(data).forEach(element => 
+    {
+        sortedPlayers[element.rank] = element
+    });
+
+    return sortedPlayers;
+  }
   return (
     <StyledMainPage>
         <Menu players = {players}/>

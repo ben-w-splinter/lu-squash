@@ -2,6 +2,7 @@ import { StyledLadder } from './styles/StyledLadder.js';
 
 export const Ladder = ({players}) => 
 {
+  console.log(players);
 
   return (
     <StyledLadder>
@@ -11,7 +12,7 @@ export const Ladder = ({players}) =>
       </tr>
       {
         //We use map to loop through the content. This will actually return the object this way
-        players.map((data) => 
+        Object.values(players).map((data) => 
         {
           return(
             <tr>

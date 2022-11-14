@@ -30,7 +30,7 @@ export const RecordMatch = ({players}) => {
       console.log("Changing " + (players[index].name) + " to " + (index + 1));
       players[index].rank = (index + 1);
 
-      const database = 'Players/' + index;
+      const database = 'Players/' + players[index].name;
 
       console.log(database);
 
@@ -41,7 +41,7 @@ export const RecordMatch = ({players}) => {
     }
 
     //Moves winning player into position of original top position
-    const database = 'Players/' + bottomRank;
+    const database = 'Players/' + players[bottomRank].name;
 
     update(ref(getDatabase(), database), 
     {
