@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const StyledMenu = styled.div`
     width: 50vw;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,10 +12,13 @@ export const StyledMenu = styled.div`
     border-radius: 25px;
     background-color: #9EA0A0;
     padding: 1rem;
-    max-height: 600px;
     color: black;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 
+    h1{
+        padding: 0;
+        margin: 0;
+    }
     button{
         text-decoration: none;
         width: fit-content;
@@ -28,5 +32,9 @@ export const StyledMenu = styled.div`
 
     button:hover{
         cursor: pointer;
+    }
+
+    @media(max-width: 1000px){
+        width: calc(100% - 4rem);
     }
 `
