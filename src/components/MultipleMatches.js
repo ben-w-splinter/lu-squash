@@ -9,12 +9,16 @@ export const MultipleMatches = ({players}) => {
   const handleClick = (e)=>
   {
     e.preventDefault();
+    document.getElementById('multiplematches').reset();
     console.log("Add player", playerName)
     const player = getPlayer(playerName);
 
     if (player.rank >= 2) 
     {
         swapPosition(player.rank - 1, player.rank);
+        document.getElementById('alertmm').innerHTML = "Congratulations! Enjoy the promotion"
+        document.getElementById('alertmm').style.color = "green"
+        setTimeout(() => {document.getElementById('alertmm').innerHTML = "" }, 4000); 
     }
   }
 
@@ -50,7 +54,8 @@ export const MultipleMatches = ({players}) => {
 
   return (
     <StyledInputForm>
-      <form>
+      <form id = 'multiplematches'>
+        <div id = 'alertmm'></div>
         <div className='namescore'>
           <input type="text" placeholder="Player Name" onChange={(v) => setPlayerName(v.target.value)}/>
         </div>
