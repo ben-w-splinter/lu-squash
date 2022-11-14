@@ -49,10 +49,14 @@ export const RecordMatch = ({players}) => {
     });
   }
 
+  const clearForm = () => {
+    document.getElementById('recordmatch').reset()
+  }
+
   const handleSubmit = (e) => {
       e.preventDefault();
       console.log("Ran with", myScore, opScore)
-
+      clearForm();
       //If I won
       if (myScore > opScore)
       {
@@ -65,17 +69,25 @@ export const RecordMatch = ({players}) => {
           if (myRank > opRank) 
           {
             derankPlayers(Math.min(myRank, opRank), Math.max(myRank, opRank)) 
+            clearForm();
+            document.getElementById('alertrm').innerHTML = "Congratulations!"
+            document.getElementById('alertrm').style.color = "green"
+            setTimeout(() => {document.getElementById('alertrm').innerHTML = "" }, 4000); 
           }
       }
       else
       {
         const myRank = getPlayer(myName).rank;
         const opRank = getPlayer(opName).rank;
+        clearForm();
 
         //If i lost and have a better rank, swap
         if (myRank < opRank)
         {
-          derankPlayers(Math.min(myRank, opRank), Math.max(myRank, opRank)) 
+          derankPlayers(Math.min(myRank, opRank), Math.max(myRank, opRank))
+          document.getElementById('alertrm').innerHTML = "Better luck next time!"
+          document.getElementById('alertrm').style.color = "red"
+          setTimeout(() => {document.getElementById('alertrm').innerHTML = "" }, 4000); 
         }
       }
 
@@ -83,7 +95,8 @@ export const RecordMatch = ({players}) => {
   }
   return (
     <StyledInputForm>
-      <form>
+      <div id='alertrm'></div>
+      <form id = 'recordmatch'>
         <div className='namescore'>
           <input type="text" placeholder="Your Name" onChange={(v) => setMyName(v.target.value)}/>
           <input type="text" placeholder="Score" onChange={(v) => setMyScore(parseInt(v.target.value))}/>
