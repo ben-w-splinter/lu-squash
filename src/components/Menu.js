@@ -25,7 +25,7 @@ export const Menu = ({players}) => {
             <button onClick={handleRecordClick}>Record Match</button>
             {showRecord && (<RecordMatch players = {players}/>)}
             <button onClick={handleAddClick}>Add Player</button>
-            {showAdd && <AddPlayer/>}
+            {showAdd && (<AddPlayer players = {players}/>)}
         </StyledMenu>
     )
 }
