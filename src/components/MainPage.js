@@ -1,6 +1,7 @@
 import React from 'react'
 import { Ladder } from './Ladder'
 import { Menu } from './Menu'
+import { Rules } from './Rules'
 import { StyledMainPage } from './styles/StyledMainPage'
 import { DatabaseConnection } from '../Firebase.js';
 import { useState, useEffect } from 'react'
@@ -48,6 +49,7 @@ export const MainPage = () => {
     <StyledMainPage>
         <Menu players = {players}/>
         <Ladder players = {players}/>
+        <Rules/>
     </StyledMainPage>
   )
 }
