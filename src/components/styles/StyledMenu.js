@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledMenu = styled.div`
-    width: 432px;
+    width: 35rem;
     height: fit-content;
     display: flex;
     flex-direction: column;
