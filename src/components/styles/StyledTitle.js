@@ -7,4 +7,8 @@ export const StyledTitle = styled.div`
     background-color: #b5121b;
     border: 10px solid black; 
     color: white;
+
+    p{
+        font-size: small;
+    }
 `
