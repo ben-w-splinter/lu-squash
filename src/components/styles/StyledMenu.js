@@ -6,7 +6,6 @@ export const StyledMenu = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
     margin: 1rem;
     border: 2px solid red;
     border-radius: 25px;
@@ -17,9 +16,14 @@ export const StyledMenu = styled.div`
 
     h1{
         padding: 0;
+        margin: 0.5rem;
+    }
+    p{
         margin: 0;
+        padding: 0;
     }
     button{
+        margin: 0.5rem;
         text-decoration: none;
         width: 10rem;
         font-size: medium;
