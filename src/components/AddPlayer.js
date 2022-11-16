@@ -2,16 +2,18 @@ import React from 'react'
 import { StyledInputForm } from './styles/StyledInputForm'
 import { useState } from 'react';
 import { getDatabase, ref, set } from "firebase/database";
-import TextField from '@mui/material/TextField';
 
 export const AddPlayer = ({players}) => {
+  function isEmptyOrSpaces(str)
+  {
+    return str === null || str.match(/^ *$/) !== null;
+  }
   const [playerName, setPlayerName] = useState("");
-  const playerNames = Object.values(players).map((e) => {return e.name})
 
   const handleClick = (e)=>
   {
     e.preventDefault();
-    setPlayerName("")
+    document.getElementById('addplayer').reset()
     console.log("Add player", playerName)
     //Check if the player is in the database
     let playerExists = false;
@@ -32,15 +34,18 @@ export const AddPlayer = ({players}) => {
   }
   const rank = players.length;
 
-  const db = getDatabase();
-  set(ref(db, 'Players/' + playerName), 
+  if(!(isEmptyOrSpaces(playerName)))
   {
-    name : playerName,
-    rank : rank
-  });
-  document.getElementById('alertap').innerHTML = "Success! Welcome to the Ladder!"
-  document.getElementById('alertap').style.color = "green"
-  setTimeout(() => {document.getElementById('alertap').innerHTML = ""}, 4000)
+    const db = getDatabase();
+    set(ref(db, 'Players/' + playerName), 
+    {
+      name : playerName,
+      rank : rank
+    });
+    document.getElementById('alertap').innerHTML = "Success! Welcome to the Ladder!"
+    document.getElementById('alertap').style.color = "green"
+    setTimeout(() => {document.getElementById('alertap').innerHTML = ""}, 4000)
+  }
 }
 
   return (
@@ -48,13 +53,7 @@ export const AddPlayer = ({players}) => {
       <form id = 'addplayer'>
         <div id='alertap'></div>
         <div className='namescore'>
-          <TextField 
-              id="My Name"
-              options={playerNames}
-              onChange={(_,v) => setPlayerName(v)}
-              value = {playerName}
-              sx = {{marginY: "1rem",width: 300}}
-              label="Your Name" />
+          <input type="text" placeholder="Player Name" onChange={(v) => setPlayerName(v.target.value)}/>
         </div>
         <button className='formButton button-submit' onClick={handleClick}>Submit</button>
       </form>
