@@ -29,11 +29,11 @@ export const Menu = ({players}) => {
     return (
         <StyledMenu>
             <h1>Menu</h1>
-            <button onClick={handleRecordClick}>Record Match</button>
+            <button className='formButton' onClick={handleRecordClick}>Record Match</button>
             {showRecord && (<RecordMatch players = {players}/>)}
-            <button onClick={handleMatchClick}>Played 3 Matches?</button>
+            <button className='formButton' onClick={handleMatchClick}>Played 3 Matches?</button>
             {showMatches && (<MultipleMatches players = {players}/>)}
-            <button onClick={handleAddClick}>Add Player</button>
+            <button className='formButton' onClick={handleAddClick}>Add Player</button>
             {showAdd && (<AddPlayer players = {players}/>)}
         </StyledMenu>
     )

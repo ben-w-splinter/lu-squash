@@ -36,6 +36,12 @@ export const StyledMenu = styled.div`
         border-radius: 8px;
     }
 
+    .button-submit{
+        background-color: white;
+        color: black;
+        padding: 0.5rem;
+    }
+
     button:hover{
         cursor: pointer;
     }

@@ -107,11 +107,12 @@ export const RecordMatch = ({players}) => {
           {/* <input type="text" placeholder="Your Name" onChange={(v) => setMyName(v.target.value)}/> */}
           <Autocomplete
               disablePortal
+              fullWidth
               id="My Name"
               options={playerNames}
               onChange={(_,v) => setMyName(v)}
               value = {myName}
-              sx = {{marginY: "1rem"}}
+              sx = {{marginY: "1rem",width: 300}}
               renderInput={(params) => <TextField {...params} label="My Name" />}
           />
           <input type="text" placeholder="Score" onChange={(v) => setMyScore(parseInt(v.target.value))}/>
@@ -128,7 +129,7 @@ export const RecordMatch = ({players}) => {
           />
           <input type="text" placeholder="Score" onChange={(v) => setOpScore(parseInt(v.target.value))}/>
         </div>
-        <button className='formbutton' onClick={handleSubmit}>Submit</button>
+        <button className='formButton button-submit' onClick={handleSubmit}>Submit</button>
       </form>
     </StyledInputForm>
   )

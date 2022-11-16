@@ -9,12 +9,6 @@ export const StyledInputForm = styled.div`
         flex-direction: row;
     }
 
-    .formbutton{
-        background-color: white;
-        color: black;
-        padding: 0.5rem;
-    }
-
     input{
         margin: 0.5rem;
         padding: 1rem;

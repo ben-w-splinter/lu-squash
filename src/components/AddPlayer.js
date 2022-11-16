@@ -2,14 +2,16 @@ import React from 'react'
 import { StyledInputForm } from './styles/StyledInputForm'
 import { useState } from 'react';
 import { getDatabase, ref, set } from "firebase/database";
+import TextField from '@mui/material/TextField';
 
 export const AddPlayer = ({players}) => {
   const [playerName, setPlayerName] = useState("");
+  const playerNames = Object.values(players).map((e) => {return e.name})
 
   const handleClick = (e)=>
   {
     e.preventDefault();
-    document.getElementById('addplayer').reset()
+    setPlayerName("")
     console.log("Add player", playerName)
     //Check if the player is in the database
     let playerExists = false;
@@ -46,9 +48,15 @@ export const AddPlayer = ({players}) => {
       <form id = 'addplayer'>
         <div id='alertap'></div>
         <div className='namescore'>
-          <input type="text" placeholder="Player Name" onChange={(v) => setPlayerName(v.target.value)}/>
+          <TextField 
+              id="My Name"
+              options={playerNames}
+              onChange={(_,v) => setPlayerName(v)}
+              value = {playerName}
+              sx = {{marginY: "1rem",width: 300}}
+              label="Your Name" />
         </div>
-        <button className='formbutton' onClick={handleClick}>Submit</button>
+        <button className='formButton button-submit' onClick={handleClick}>Submit</button>
       </form>
     </StyledInputForm>
   )

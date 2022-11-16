@@ -2,14 +2,17 @@ import React from 'react'
 import { StyledInputForm } from './styles/StyledInputForm'
 import { useState } from 'react';
 import { getDatabase, ref, update } from "firebase/database";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 export const MultipleMatches = ({players}) => {
   const [playerName, setPlayerName] = useState("");
+  const playerNames = Object.values(players).map((e) => {return e.name})
 
   const handleClick = (e)=>
   {
     e.preventDefault();
-    document.getElementById('multiplematches').reset();
+    setPlayerName("")
     console.log("Add player", playerName)
     const player = getPlayer(playerName);
 
@@ -57,9 +60,17 @@ export const MultipleMatches = ({players}) => {
       <form id = 'multiplematches'>
         <div id = 'alertmm'></div>
         <div className='namescore'>
-          <input type="text" placeholder="Player Name" onChange={(v) => setPlayerName(v.target.value)}/>
+        <Autocomplete
+              disablePortal
+              id="My Name"
+              options={playerNames}
+              sx = {{marginY: "1rem",width: 300}}
+              onChange={(e,v) => setPlayerName(v)}
+              value={playerName}
+              renderInput={(params) => <TextField {...params} label="Your Name" />}
+          />
         </div>
-        <button className='formbutton' onClick={handleClick}>Submit</button>
+        <button className='formButton button-submit' onClick={handleClick}>Submit</button>
       </form>
     </StyledInputForm>
   )
