@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { StyledInputForm } from './styles/StyledInputForm'
 import { getDatabase, ref, update } from "firebase/database";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 export const RecordMatch = ({players}) => {
 
@@ -9,6 +12,7 @@ export const RecordMatch = ({players}) => {
   const [myScore, setMyScore] = useState(0);
   const [opName, setOpName] = useState("");
   const [opScore, setOpScore] = useState(0);
+  const playerNames = Object.values(players).map((e) => {return e.name})
 
   const derankPlayers = (topRank, bottomRank) => 
   {
@@ -51,6 +55,8 @@ export const RecordMatch = ({players}) => {
 
   const clearForm = () => {
     document.getElementById('recordmatch').reset()
+    setMyName("")
+    setOpName("")
   }
 
   const handleSubmit = (e) => {
@@ -98,11 +104,28 @@ export const RecordMatch = ({players}) => {
       <div id='alertrm'></div>
       <form id = 'recordmatch'>
         <div className='namescore'>
-          <input type="text" placeholder="Your Name" onChange={(v) => setMyName(v.target.value)}/>
+          {/* <input type="text" placeholder="Your Name" onChange={(v) => setMyName(v.target.value)}/> */}
+          <Autocomplete
+              disablePortal
+              id="My Name"
+              options={playerNames}
+              onChange={(_,v) => setMyName(v)}
+              value = {myName}
+              sx = {{marginY: "1rem"}}
+              renderInput={(params) => <TextField {...params} label="My Name" />}
+          />
           <input type="text" placeholder="Score" onChange={(v) => setMyScore(parseInt(v.target.value))}/>
         </div>
         <div className='namescore'>
-          <input type="text" placeholder='Oponent Name' onChange={(v) => setOpName(v.target.value)}/>
+        <Autocomplete
+              disablePortal
+              id="My Name"
+              options={playerNames}
+              sx = {{marginY: "1rem"}}
+              onChange={(e,v) => setOpName(v)}
+              value={opName}
+              renderInput={(params) => <TextField {...params} label="Oponent Name" />}
+          />
           <input type="text" placeholder="Score" onChange={(v) => setOpScore(parseInt(v.target.value))}/>
         </div>
         <button className='formbutton' onClick={handleSubmit}>Submit</button>

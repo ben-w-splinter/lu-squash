@@ -22,7 +22,8 @@ export const StyledMenu = styled.div`
         margin: 0;
         padding: 0;
     }
-    button{
+
+    .formButton{
         margin: 0.5rem;
         text-decoration: none;
         width: 10rem;
