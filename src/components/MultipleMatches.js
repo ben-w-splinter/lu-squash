@@ -70,7 +70,7 @@ export const MultipleMatches = ({players}) => {
               renderInput={(params) => <TextField {...params} label="Your Name" />}
           />
         </div>
-        <button className='formbutton' onClick={handleClick}>Submit</button>
+        <button className='formButton button-submit' onClick={handleClick}>Submit</button>
       </form>
     </StyledInputForm>
   )
