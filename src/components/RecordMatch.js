@@ -32,17 +32,21 @@ export const RecordMatch = ({players}) => {
 
       update(ref(getDatabase(), database), 
       {
-        rank: (index + 1)
+        rank: (index + 1),
       });
     }
 
     //Moves winning player into position of original top position
-    const database = 'Players/' + players[bottomRank].name;
+    let database = 'Players/' + players[bottomRank].name;
 
+    //Update bottom rank player
     update(ref(getDatabase(), database), 
     {
-        rank: topPosition
+        rank: topPosition,
+        matches: (players[bottomRank].matches + 1)
     });
+
+    database = 'Players/' + players[topRank].name;
   }
 
   const getPlayer = (name) => {
@@ -63,12 +67,22 @@ export const RecordMatch = ({players}) => {
       e.preventDefault();
       console.log("Ran with", myScore, opScore)
       clearForm();
+      console.log("Getting Ranks")
+      const myRank = getPlayer(myName).rank;
+      const opRank = getPlayer(opName).rank;
+      //Update my matches
+      update(ref(getDatabase(), "Players/" + myName), 
+      {
+          matches: (players[myRank].matches + 1)
+      });
+      //Update oponent matches
+      update(ref(getDatabase(), "Players/" + opName), 
+      {
+          matches: (players[opRank].matches + 1)
+      });
       //If I won
       if (myScore > opScore)
       {
-          console.log("Getting Ranks")
-          const myRank = getPlayer(myName).rank;
-          const opRank = getPlayer(opName).rank;
 
           //If i won and have a lower rank, swap
           //Move everyone else down

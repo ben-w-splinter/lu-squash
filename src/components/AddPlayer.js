@@ -40,7 +40,8 @@ export const AddPlayer = ({players}) => {
     set(ref(db, 'Players/' + playerName), 
     {
       name : playerName,
-      rank : rank
+      rank : rank,
+      matches: 0
     });
     document.getElementById('alertap').innerHTML = "Success! Welcome to the Ladder!"
     document.getElementById('alertap').style.color = "green"
